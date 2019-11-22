@@ -7,13 +7,10 @@ package almoxarifadoger.view.crud;
 
 import almoxarifadoger.AlmoxarifadoGER;
 import almoxarifadoger.controller.DAOMovimento;
-import almoxarifadoger.model.Almoxarifado;
 import almoxarifadoger.model.MovimentoItemAlmox;
-import almoxarifadoger.utils.StringUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**

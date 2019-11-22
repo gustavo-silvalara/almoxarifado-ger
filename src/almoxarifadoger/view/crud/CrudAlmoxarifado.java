@@ -23,7 +23,6 @@ public class CrudAlmoxarifado extends CrudLayout {
     public CrudAlmoxarifado(String titulo) {
         super("Almoxarifados");
         daoA = new DAOAlmoxarifado();
-        this.btnPrint.setVisible(true);
         setTbModel();
         getItens();
     }
@@ -62,9 +61,9 @@ public class CrudAlmoxarifado extends CrudLayout {
     @Override
     public void getItens() {
         List<Almoxarifado> listaAlmoxarifado = daoA.read(" ");
+        DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
+        m.setRowCount(0);
         if (!listaAlmoxarifado.isEmpty()) {
-            DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
-            m.setRowCount(0);
             for (Almoxarifado r : listaAlmoxarifado) {
                 m.addRow(new Object[]{r.getId(), r});
             }
@@ -73,7 +72,7 @@ public class CrudAlmoxarifado extends CrudLayout {
 
     @Override
     public void btnAdd() {
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Almoxarifado!");
+        String nome = JOptionPane.showInputDialog(this, "Insira o nome do Almoxarifado!");
         if (StringUtils.stringValida(nome)) {
             Almoxarifado a = new Almoxarifado();
             a.setNome(nome);
@@ -84,7 +83,7 @@ public class CrudAlmoxarifado extends CrudLayout {
     @Override
     public void btnEdit() {
         Almoxarifado a = (Almoxarifado) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Almoxarifado!", a.getNome());
+        String nome = JOptionPane.showInputDialog(this, "Insira o nome do Almoxarifado!", a.getNome());
         if (StringUtils.stringValida(nome)) {
             a.setNome(nome);
             daoA.save(a);

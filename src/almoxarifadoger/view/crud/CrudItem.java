@@ -61,9 +61,9 @@ public class CrudItem extends CrudLayout {
     @Override
     public void getItens() {
         List<Item> listaItem = daoI.read(" ");
+        DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
+        m.setRowCount(0);
         if (!listaItem.isEmpty()) {
-            DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
-            m.setRowCount(0);
             for (Item i : listaItem) {
                 m.addRow(new Object[]{i.getId(), i});
             }
@@ -72,7 +72,7 @@ public class CrudItem extends CrudLayout {
 
     @Override
     public void btnAdd() {
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Item!");
+        String nome = JOptionPane.showInputDialog(this, "Insira o nome do Item!");
         if (StringUtils.stringValida(nome)) {
             Item i = new Item();
             i.setDescricao(nome);
@@ -83,7 +83,7 @@ public class CrudItem extends CrudLayout {
     @Override
     public void btnEdit() {
         Item i = (Item) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Item!", i.getDescricao());
+        String nome = JOptionPane.showInputDialog(this, "Insira o nome do Item!", i.getDescricao());
         if (StringUtils.stringValida(nome)) {
             i.setDescricao(nome);
             daoI.save(i);

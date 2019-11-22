@@ -8,7 +8,6 @@ package almoxarifadoger.view.crud;
 import almoxarifadoger.controller.DAOResponsavel;
 import almoxarifadoger.model.Responsavel;
 import almoxarifadoger.utils.StringUtils;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -62,9 +61,9 @@ public class CrudResponsavel extends CrudLayout {
     @Override
     public void getItens() {
         List<Responsavel> listaResponsavel = daoR.read(" ");
+        DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
+        m.setRowCount(0);
         if (!listaResponsavel.isEmpty()) {
-            DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
-            m.setRowCount(0);
             for (Responsavel r : listaResponsavel) {
                 m.addRow(new Object[]{r.getId(), r});
             }
@@ -73,7 +72,7 @@ public class CrudResponsavel extends CrudLayout {
 
     @Override
     public void btnAdd() {
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Responsável!");
+        String nome = JOptionPane.showInputDialog(this, "Insira o nome do Responsável!");
         if (StringUtils.stringValida(nome)) {
             Responsavel r = new Responsavel();
             r.setNome(nome);
@@ -84,7 +83,7 @@ public class CrudResponsavel extends CrudLayout {
     @Override
     public void btnEdit() {
         Responsavel r = (Responsavel) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Responsável!", r.getNome());
+        String nome = JOptionPane.showInputDialog(this, "Insira o nome do Responsável!", r.getNome());
         if (StringUtils.stringValida(nome)) {
             r.setNome(nome);
             daoR.save(r);

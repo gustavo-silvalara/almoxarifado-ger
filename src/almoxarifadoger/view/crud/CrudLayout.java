@@ -21,7 +21,6 @@ public abstract class CrudLayout extends javax.swing.JPanel {
         initComponents();
         titulo = StringUtils.stringValida(titulo) ? titulo : "Tela";
         this.lblTitle.setText(titulo);
-        this.btnPrint.setVisible(false);
         this.revalidate();
         this.repaint();
     }
@@ -42,7 +41,6 @@ public abstract class CrudLayout extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
-        btnPrint = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -118,14 +116,6 @@ public abstract class CrudLayout extends javax.swing.JPanel {
             }
         });
 
-        btnPrint.setBackground(new java.awt.Color(255, 255, 255));
-        btnPrint.setText("Imprimir");
-        btnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,8 +127,6 @@ public abstract class CrudLayout extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSair)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPrint)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEdit)
@@ -161,8 +149,7 @@ public abstract class CrudLayout extends javax.swing.JPanel {
                     .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSair)
-                    .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSair))
                 .addGap(7, 7, 7))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -187,10 +174,6 @@ public abstract class CrudLayout extends javax.swing.JPanel {
         AlmoxarifadoGER.atualizaTela();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPrintActionPerformed
-
     public abstract void setTbModel();
 
     public abstract void getItens();
@@ -204,7 +187,6 @@ public abstract class CrudLayout extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btnAdd;
     protected javax.swing.JButton btnEdit;
-    protected javax.swing.JButton btnPrint;
     protected javax.swing.JButton btnRemove;
     protected javax.swing.JButton btnSair;
     protected javax.swing.JScrollPane jScrollPane1;
