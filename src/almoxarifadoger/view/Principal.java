@@ -171,6 +171,11 @@ public class Principal extends javax.swing.JFrame {
         this.setLocation(p);
     }//GEN-LAST:event_pnBarMouseDragged
 
+    public void crudOpened() {
+        menuOpened = false;
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/almoxarifadoger/images/menu.png")));
+    }
+
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/almoxarifadoger/images/fecharHover.png")));
     }//GEN-LAST:event_btnCloseMouseEntered
@@ -197,17 +202,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizeMouseClicked
 
     private void btnMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseEntered
-        if(!menuOpened){
+        if (!menuOpened) {
             btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/almoxarifadoger/images/menuHover.png")));
-        } else{
+        } else {
             btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/almoxarifadoger/images/voltarHover.png")));
         }
     }//GEN-LAST:event_btnMenuMouseEntered
 
     private void btnMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseExited
-        if(!menuOpened){
+        if (!menuOpened) {
             btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/almoxarifadoger/images/menu.png")));
-        } else{
+        } else {
             btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/almoxarifadoger/images/voltar.png")));
         }
     }//GEN-LAST:event_btnMenuMouseExited

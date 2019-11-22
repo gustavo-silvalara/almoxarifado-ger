@@ -7,6 +7,7 @@ package almoxarifadoger.view.crud;
 
 import almoxarifadoger.controller.DAOResponsavel;
 import almoxarifadoger.model.Responsavel;
+import almoxarifadoger.utils.StringUtils;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gustavo
  */
-public class CrudResponsavel extends CrudRead {
+public class CrudResponsavel extends CrudLayout {
 
     private DAOResponsavel daoR;
 
@@ -73,17 +74,21 @@ public class CrudResponsavel extends CrudRead {
     @Override
     public void btnAdd() {
         String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Responsável!");
-        Responsavel r = new Responsavel();
-        r.setNome(nome);
-        daoR.save(r);
+        if (StringUtils.stringValida(nome)) {
+            Responsavel r = new Responsavel();
+            r.setNome(nome);
+            daoR.save(r);
+        }
     }
 
     @Override
     public void btnEdit() {
         Responsavel r = (Responsavel) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
         String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Responsável!", r.getNome());
-        r.setNome(nome);
-        daoR.save(r);
+        if (StringUtils.stringValida(nome)) {
+            r.setNome(nome);
+            daoR.save(r);
+        }
     }
 
     @Override

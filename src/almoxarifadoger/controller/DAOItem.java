@@ -49,11 +49,11 @@ public class DAOItem {
             rs.next();
             Long count = rs.getLong("count");
             if (count > 0) {
-                stmt = this.connection.prepareStatement("update items set nome = ? where id = ?;");
+                stmt = this.connection.prepareStatement("update items set descricao = ? where id = ?;");
                 stmt.setString(1, item.getDescricao());
                 stmt.setLong(2, item.getId());
             } else {
-                stmt = this.connection.prepareStatement("insert into items(nome) VALUES (?);");
+                stmt = this.connection.prepareStatement("insert into items(descricao) VALUES (?);");
                 stmt.setString(1, item.getDescricao());
             }
             i = stmt.executeUpdate();
@@ -74,7 +74,7 @@ public class DAOItem {
             while (rs.next()) {
                 Item i = new Item();
                 i.setId(rs.getLong("id"));
-                i.setDescricao(rs.getString("nome"));
+                i.setDescricao(rs.getString("descricao"));
                 listaItem.add(i);
             }
             stmt.close();

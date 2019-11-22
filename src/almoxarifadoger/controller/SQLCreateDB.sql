@@ -1,0 +1,50 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ * Author:  gustavo
+ * Created: 22/11/2019
+ */
+
+create database almoxarifado_ger;
+SET GLOBAL time_zone = '+4:00';
+CREATE TABLE IF NOT EXISTS RESPONSAVEIS
+(
+    ID   BIGINT PRIMARY KEY auto_increment,
+    NOME VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS ALMOXARIFADOS
+(
+    ID   BIGINT PRIMARY KEY auto_increment,
+    NOME VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS ITEMS
+(
+    ID        BIGINT PRIMARY KEY auto_increment,
+    DESCRICAO VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS ITEMS_ALMOXARIFADO
+(
+    ID       BIGINT PRIMARY KEY auto_increment,
+    ID_ITEM  BIGINT,
+    ID_ALMOX BIGINT,
+    CONSTRAINT FK_ITEM FOREIGN KEY (ID_ITEM) REFERENCES ITEMS(ID),
+    CONSTRAINT FK_ALMOX FOREIGN KEY (ID_ALMOX) REFERENCES ALMOXARIFADOS(ID),
+    CONSTRAINT FK_ITEM UNIQUE KEY (ID_ITEM, ID_ALMOX)
+);
+
+CREATE TABLE IF NOT EXISTS MOVIMENTO_ITENS
+(
+    ID             BIGINT PRIMARY KEY auto_increment,
+    ID_ITEMS_ALMOX BIGINT,
+    ID_RESPONSAVEL BIGINT,
+    DATA           BIGINT,
+    TIPO           INT,
+    CONSTRAINT FK_ITEM_ALMOX FOREIGN KEY (ID_ITEMS_ALMOX) REFERENCES  ITEMS_ALMOXARIFADO(ID),
+    CONSTRAINT FK_RESPONSAVEL FOREIGN KEY (ID_RESPONSAVEL) REFERENCES RESPONSAVEIS(ID)
+);

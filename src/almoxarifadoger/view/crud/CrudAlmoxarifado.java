@@ -7,6 +7,7 @@ package almoxarifadoger.view.crud;
 
 import almoxarifadoger.controller.DAOAlmoxarifado;
 import almoxarifadoger.model.Almoxarifado;
+import almoxarifadoger.utils.StringUtils;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,13 +16,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gustavo
  */
-public class CrudAlmoxarifado extends CrudRead {
+public class CrudAlmoxarifado extends CrudLayout {
 
     private DAOAlmoxarifado daoA;
 
     public CrudAlmoxarifado(String titulo) {
         super("Almoxarifados");
         daoA = new DAOAlmoxarifado();
+        this.btnPrint.setVisible(true);
         setTbModel();
         getItens();
     }
@@ -72,17 +74,21 @@ public class CrudAlmoxarifado extends CrudRead {
     @Override
     public void btnAdd() {
         String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Almoxarifado!");
-        Almoxarifado a = new Almoxarifado();
-        a.setNome(nome);
-        daoA.save(a);
+        if (StringUtils.stringValida(nome)) {
+            Almoxarifado a = new Almoxarifado();
+            a.setNome(nome);
+            daoA.save(a);
+        }
     }
 
     @Override
     public void btnEdit() {
         Almoxarifado a = (Almoxarifado) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
         String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Almoxarifado!", a.getNome());
-        a.setNome(nome);
-        daoA.save(a);
+        if (StringUtils.stringValida(nome)) {
+            a.setNome(nome);
+            daoA.save(a);
+        }
     }
 
     @Override

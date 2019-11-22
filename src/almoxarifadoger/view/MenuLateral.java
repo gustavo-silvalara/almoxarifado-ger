@@ -7,6 +7,8 @@ package almoxarifadoger.view;
 
 import almoxarifadoger.AlmoxarifadoGER;
 import almoxarifadoger.view.crud.CrudAlmoxarifado;
+import almoxarifadoger.view.crud.CrudItem;
+import almoxarifadoger.view.crud.CrudMovimento;
 import almoxarifadoger.view.crud.CrudResponsavel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,6 +48,9 @@ public class MenuLateral extends javax.swing.JPanel {
         btnCrudItem.setText(" Cadastrar Item");
         btnCrudItem.setOpaque(true);
         btnCrudItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCrudItemMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCrudItemMouseEntered(evt);
             }
@@ -59,6 +64,9 @@ public class MenuLateral extends javax.swing.JPanel {
         btnMovItem.setText(" Movimentar Item");
         btnMovItem.setOpaque(true);
         btnMovItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMovItemMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMovItemMouseEntered(evt);
             }
@@ -158,6 +166,7 @@ public class MenuLateral extends javax.swing.JPanel {
         CrudResponsavel crudResponsavel = new CrudResponsavel("Responsáveis");
         AlmoxarifadoGER.principal.pnMain.removeAll();
         AlmoxarifadoGER.principal.pnMain.add(crudResponsavel, BorderLayout.CENTER);
+        AlmoxarifadoGER.principal.crudOpened();
         AlmoxarifadoGER.atualizaTela();
     }//GEN-LAST:event_btnCrudRespMouseClicked
 
@@ -165,8 +174,25 @@ public class MenuLateral extends javax.swing.JPanel {
         CrudAlmoxarifado crudAlmoxarifado = new CrudAlmoxarifado("Almoxarifados");
         AlmoxarifadoGER.principal.pnMain.removeAll();
         AlmoxarifadoGER.principal.pnMain.add(crudAlmoxarifado, BorderLayout.CENTER);
+        AlmoxarifadoGER.principal.crudOpened();
         AlmoxarifadoGER.atualizaTela();
     }//GEN-LAST:event_btnCrudAlmoxMouseClicked
+
+    private void btnCrudItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrudItemMouseClicked
+        CrudItem crudItem = new CrudItem("Items");
+        AlmoxarifadoGER.principal.pnMain.removeAll();
+        AlmoxarifadoGER.principal.pnMain.add(crudItem, BorderLayout.CENTER);
+        AlmoxarifadoGER.principal.crudOpened();
+        AlmoxarifadoGER.atualizaTela();
+    }//GEN-LAST:event_btnCrudItemMouseClicked
+
+    private void btnMovItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMovItemMouseClicked
+        CrudMovimento crudMovimento = new CrudMovimento("Items");
+        AlmoxarifadoGER.principal.pnMain.removeAll();
+        AlmoxarifadoGER.principal.pnMain.add(crudMovimento, BorderLayout.CENTER);
+        AlmoxarifadoGER.principal.crudOpened();
+        AlmoxarifadoGER.atualizaTela();
+    }//GEN-LAST:event_btnMovItemMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

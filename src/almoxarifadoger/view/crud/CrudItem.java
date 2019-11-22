@@ -5,8 +5,9 @@
  */
 package almoxarifadoger.view.crud;
 
-import almoxarifadoger.controller.DAOAlmoxarifado;
-import almoxarifadoger.model.Almoxarifado;
+import almoxarifadoger.controller.DAOItem;
+import almoxarifadoger.model.Item;
+import almoxarifadoger.utils.StringUtils;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,13 +16,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gustavo
  */
-public class CrudItem extends CrudRead {
+public class CrudItem extends CrudLayout {
 
-    private DAOAlmoxarifado daoA;
+    private DAOItem daoI;
 
     public CrudItem(String titulo) {
-        super("Almoxarifados");
-        daoA = new DAOAlmoxarifado();
+        super("Itens");
+        daoI = new DAOItem();
         setTbModel();
         getItens();
     }
@@ -31,7 +32,7 @@ public class CrudItem extends CrudRead {
         tbResults.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Código", "Nome"
+                    "Código", "Descrição"
                 }
         ) {
             Class[] types = new Class[]{
@@ -59,36 +60,40 @@ public class CrudItem extends CrudRead {
 
     @Override
     public void getItens() {
-        List<Almoxarifado> listaAlmoxarifado = daoA.read(" ");
-        if (!listaAlmoxarifado.isEmpty()) {
+        List<Item> listaItem = daoI.read(" ");
+        if (!listaItem.isEmpty()) {
             DefaultTableModel m = (DefaultTableModel) tbResults.getModel();
             m.setRowCount(0);
-            for (Almoxarifado r : listaAlmoxarifado) {
-                m.addRow(new Object[]{r.getId(), r});
+            for (Item i : listaItem) {
+                m.addRow(new Object[]{i.getId(), i});
             }
         }
     }
 
     @Override
     public void btnAdd() {
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Almoxarifado!");
-        Almoxarifado a = new Almoxarifado();
-        a.setNome(nome);
-        daoA.save(a);
+        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Item!");
+        if (StringUtils.stringValida(nome)) {
+            Item i = new Item();
+            i.setDescricao(nome);
+            daoI.save(i);
+        }
     }
 
     @Override
     public void btnEdit() {
-        Almoxarifado a = (Almoxarifado) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
-        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Almoxarifado!", a.getNome());
-        a.setNome(nome);
-        daoA.save(a);
+        Item i = (Item) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
+        String nome = JOptionPane.showInputDialog(this, "Insira o Nome do Item!", i.getDescricao());
+        if (StringUtils.stringValida(nome)) {
+            i.setDescricao(nome);
+            daoI.save(i);
+        }
     }
 
     @Override
     public void btnRemove() {
-        Almoxarifado a = (Almoxarifado) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
-        daoA.delete(a);
+        Item i = (Item) tbResults.getValueAt(tbResults.getSelectedRow(), 1);
+        daoI.delete(i);
     }
 
 }
