@@ -5,6 +5,7 @@
  */
 package almoxarifadoger.controller;
 
+import almoxarifadoger.AlmoxarifadoGER;
 import almoxarifadoger.model.Almoxarifado;
 import almoxarifadoger.model.Item;
 import almoxarifadoger.model.Responsavel;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -96,7 +98,12 @@ public class DAOItem {
             i = stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+           if (ex.getErrorCode() == 1451) {
+                JOptionPane.showMessageDialog(AlmoxarifadoGER.principal, "Não foi possível realizar a "
+                        + "exclusão, há um movimento relacionado");
+            } else {
+                Logger.getLogger(DAOAlmoxarifado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return i;
     }

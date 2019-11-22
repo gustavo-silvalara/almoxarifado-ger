@@ -5,6 +5,7 @@
  */
 package almoxarifadoger.controller;
 
+import almoxarifadoger.AlmoxarifadoGER;
 import almoxarifadoger.model.Responsavel;
 import almoxarifadoger.utils.StringUtils;
 import java.util.List;
@@ -15,15 +16,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author gustavo
  */
 public class DAOResponsavel {
-    
+
     private Connection connection;
-    
+
     public DAOResponsavel() {
         try {
             this.connection = ConnectionFactory.getConnectionFactory();
@@ -31,7 +33,7 @@ public class DAOResponsavel {
             Logger.getLogger(DAOResponsavel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public int save(Responsavel responsavel) {
         int i = 0;
         try {
@@ -61,7 +63,7 @@ public class DAOResponsavel {
         }
         return i;
     }
-    
+
     public List<Responsavel> read(String where) {
         List<Responsavel> listaResponsavel = new ArrayList<>();
         try {
@@ -81,7 +83,7 @@ public class DAOResponsavel {
         }
         return listaResponsavel;
     }
-    
+
     public int delete(Responsavel responsavel) {
         int i = 0;
         if (responsavel == null) {
@@ -94,7 +96,12 @@ public class DAOResponsavel {
             i = stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOResponsavel.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getErrorCode() == 1451) {
+                JOptionPane.showMessageDialog(AlmoxarifadoGER.principal, "Não foi possível realizar a "
+                        + "exclusão, há um movimento relacionado");
+            } else {
+                Logger.getLogger(DAOAlmoxarifado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return i;
     }
