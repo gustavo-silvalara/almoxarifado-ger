@@ -24,6 +24,8 @@ Execute o script no MySQL
 ### Conexão com o Banco
 Também no pacote **almoxarifadoger.controller**, abra o **ConnectionFactory**
 
+Altere o usuário e senha do banco
+
 ![connection](./ghimg/connection.png "Alterando o login e senha do banco")
 
 ---
